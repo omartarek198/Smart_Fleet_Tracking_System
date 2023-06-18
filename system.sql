@@ -123,6 +123,7 @@ CREATE TABLE `route` (
 
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
+  `user_type` varchar(20) NOT NULL,
   `passwd` varchar(256) NOT NULL,
   `email` varchar(30) NOT NULL,
   `fname` varchar(10) NOT NULL,
