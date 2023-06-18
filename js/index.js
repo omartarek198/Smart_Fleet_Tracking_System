@@ -21,15 +21,23 @@ function initMap() {
 // set of coordinates.
 const eqfeed_callback = function (results) {
   for (let i = 0; i < results.features.length; i++) {
+      // Create an info window to share between markers.
+    const infoWindow = new google.maps.InfoWindow();
     const coords = results.features[i].geometry.coordinates;
     const latLng = new google.maps.LatLng(coords[1], coords[0]);
 
-    new google.maps.Marker({
+    const marker = new google.maps.Marker({
       position: latLng,
       map: map,
+      title: 'd',
+
     });
-  }
-};
+    // Add a click listener for each marker, and set up the info window.
+    marker.addListener("click", () => {
+    infoWindow.close();
+    infoWindow.setContent(marker.getTitle());
+    infoWindow.open(marker.getMap(), marker);
+    });
 
 window.initMap = initMap;
 window.eqfeed_callback = eqfeed_callback;
