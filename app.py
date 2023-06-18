@@ -80,6 +80,7 @@ def unauthorized_handler():
     return "Unauthorized", 401
 
 
+# TODO: Add region selection
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if flask.request.method == "GET":
