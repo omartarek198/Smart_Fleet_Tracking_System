@@ -3,6 +3,14 @@ import flask_login
 class User(flask_login.UserMixin):
     pass
 
+class Driver(User):
+    pass
+
+class Admin(User):
+    pass
+
+class Passenger(User):
+    pass
 
 @login_manager.user_loader
 def user_loader(email):
