@@ -2,6 +2,7 @@ import flask
 import flask_login
 
 app = flask.Flask(__name__)
+app.secret_key = 'kodqwpjdqwodOIWJDnqDIOJ209E019'
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
 
@@ -41,6 +42,10 @@ def login():
                '''
 
     email = flask.request.form['email']
+    print(f'{users=}')
+    print(f'{email=}')
+    print(f'{flask.request.form["password"]=}')
+
     if email in users and flask.request.form['password'] == users[email]['password']:
         user = User()
         user.id = email
@@ -63,15 +68,26 @@ def logout():
 def unauthorized_handler():
     return 'Unauthorized', 401
 
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if flask.request.method == 'GET':
+        return """
+        <form action='signup' method='POST'>
+            <input type='text' name='email' id='email' placeholder='email'/>
+            <input type='password' name='password' id='password' placeholder='password'/>
+            <input type='password' name='password' id='password' placeholder='password'/> 
+            <input type='submit' name='submit'/>
+        </form>
+        """
+    
+
+    email = flask.request.form['email']
+    password = flask.request.form['password']
+    users[email] = {'password': password}
+
+    print(f'{users=}')
+    return flask.redirect(flask.url_for('login'))
+
 @app.route('/')
 def index():
-    
-    response = """
-    <form action='signup' method='POST'>
-        <input type='text' name='email' id='email' placeholder='email'/>
-        <input type='password' name='password' id='password' placeholder='password'/>
-        <input type='password' name='password' id='password' placeholder='password'/> 
-        <input type='submit' name='submit'/>
-    </form>
-    """
-    # return flask.redirect('/login')
+    return flask.redirect(flask.url_for('signup'))
