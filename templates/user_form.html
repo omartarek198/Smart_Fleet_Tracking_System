@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Form</title>
+</head>
+<body>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>ID: {{ form.id }}</p>
+        <p>User Type: {{ form.user_type }}</p>
+        <p>Email: {{ form.email }}</p>
+        <p>Password: {{ form.passwd }}</p>
+        <p>First Name: {{ form.fname }}</p>
+        <p>Last Name: {{ form.lname }}</p>
+        <p>{{ form.submit() }}</p>
+    </form>
+</body>
+</html>

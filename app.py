@@ -79,6 +79,10 @@ def logout():
 def unauthorized_handler():
     return "Unauthorized", 401
 
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
 
 # TODO: Add region selection
 @app.route("/signup", methods=["GET", "POST"])
