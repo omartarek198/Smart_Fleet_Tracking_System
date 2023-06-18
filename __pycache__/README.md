@@ -1,1 +1,0 @@
-# Smart_Fleet_Tracking_System
