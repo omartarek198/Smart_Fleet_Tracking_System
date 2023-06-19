@@ -22,9 +22,8 @@ class User(flask_login.UserMixin):
             f"""
             SELECT *
             FROM user
-            WHERE user_id=%d
-        """,
-            id,
+            WHERE user_id=%s
+        """, (id,),
         )
         params = cursor.fetchone()
         return User(*params)
@@ -56,7 +55,7 @@ class User(flask_login.UserMixin):
             f"""
             UPDATE user
             SET email=%s, passwd=%s, fname=%s, lname=%s
-            WHERE user_id=%d
+            WHERE user_id=%s
         """,
             (self.email, self.passwd, self.fname, self.lname, self.id),
         )
@@ -92,7 +91,7 @@ class User(flask_login.UserMixin):
             FROM User
             WHERE email=%s
         """,
-            email,
+            (email,),
         )
         params = cursor.fetchone()
         if params is None:
@@ -127,9 +126,9 @@ class Model:
             f"""
             SELECT name, emission_rate, fuel_rate
             FROM model
-            WHERE model_id=%d
+            WHERE model_id=%s
         """,
-            id,
+            (id,),
         )
         params = cursor.fetchone()
         return Model(*params) if params else None
@@ -151,7 +150,7 @@ class Model:
             f"""
             UPDATE model
             SET name=%s, emission_rate=%s, fuel_rate=%s
-            WHERE model_id=%d
+            WHERE model_id=%s
         """,
             (self.name, self.emission_rate, self.fuel_rate, self.id),
         )
@@ -171,9 +170,9 @@ class Bus:
             """
             SELECT model_id, driver_id, n_passengers
             FROM bus
-            WHERE bus_id=%d
+            WHERE bus_id=%s
         """,
-            id,
+            (id,),
         )
         (model_id, driver_id, capacity) = cursor.fetchone()
         model = Model.get(model_id, connection)
@@ -185,7 +184,7 @@ class Bus:
         cursor.execute(
             f"""
             INSERT INTO bus (model_id, driver_id, n_passengers)
-            VALUES (%d, %d, %d)
+            VALUES (%s, %s, %s)
         """,
             (self.model.id, self.driver.id, self.capacity),
         )
@@ -196,8 +195,8 @@ class Bus:
         cursor.execute(
             f"""
             UPDATE bus
-            SET model_id=%d, driver_id=%d, n_passengers=%d
-            WHERE bus_id=%d
+            SET model_id=%s, driver_id=%s, n_passengers=%s
+            WHERE bus_id=%s
         """,
             (self.model.id, self.driver.id, self.capacity, self.id),
         )

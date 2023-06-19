@@ -1,22 +1,50 @@
+{% extends "base.html" %}
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Admin Page</title>
   <style>
     /* DRIVER DELAY */
     /* Add your custom CSS styles for the admin page here */
   </style>
-        <link rel="stylesheet" type="text/css" href="../style/style.css" />
-        <script src="../js/index.js"></script>
-    
+  <link rel="stylesheet" type="text/css" href="../style/style.css" />
+  <script src="../js/index.js"></script>
+
 </head>
+
 <body>
   <h1>Welcome, Admin!</h1>
   <p>This is the admin page.</p>
+  {% block content %}
+  <div class="container">
+    <h1 class="text-center">Welcome to the Admin Dashboard</h1>
+    <div class="row justify-content-center">
+      <div class="col-md-6 my-3">
+        <a href="/users" class="btn btn-primary btn-lg btn-block">USERS</a>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-6 my-3">
+        <a href="/buses" class="btn btn-primary btn-lg btn-block">BUSES</a>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-6 my-3">
+        <a href="/analytics" class="btn btn-primary btn-lg btn-block">ANALYTICS</a>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-6 my-3">
+        <a href="/trips" class="btn btn-primary btn-lg btn-block">TRIPS</a>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
   <div id="map"></div>
   <script
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly"
-  defer
-></script>
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly"
+    defer></script>
 </body>
+  
 </html>
